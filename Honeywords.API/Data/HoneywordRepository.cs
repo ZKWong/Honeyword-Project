@@ -18,9 +18,17 @@ namespace Honeywords.API.Data
             List<string> passwords = new List<string>();
 
             passwords.Add(password);
-            for (int i = 1; i < count; i++)
+             for (int i = 0; i < count; i++)
             {
-                passwords.Add(password + ran.Next(1, 1000));
+                char[] chars = password.ToCharArray();
+                for (int j = 0; j < chars.Length; j++)
+                {
+                    if (Char.IsDigit(chars[j]))
+                    {
+                        chars[j] = ran.Next(0, 9).ToString().ToCharArray()[0];
+                    }
+                }
+                passwords.Add(new String(chars));
             }
             passwords.Shuffle();
             string mypwdHash="";
